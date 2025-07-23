@@ -162,8 +162,8 @@
     }
     
 
-   
-    .menu-hidden { opacity: 0; visibility: hidden; }
+    
+    .menu-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     .menu-content { max-width: 720px; margin: auto; color: #e6e6e6; width: 100%; }
     .menu-section h2 { font-weight: 700; font-size: 1.5rem; margin-bottom: 1rem; color: #f9d1d1; }
     .menu-list a { font-weight: 600; font-size: 1.125rem; color: #e6e6e6; transition: color 0.3s ease; }
@@ -183,15 +183,15 @@
   <div class="max-w-4xl mx-auto px-6 py-8">
     <main class="flex-1 flex flex-col gap-10">
       <header class="flex items-center justify-between w-full py-2 scroll-fade">
-        <a href="#" class="flex items-center gap-4 group">
+        <a href="index.html" class="flex items-center gap-4 group">
           <div class="story-ring transition-transform duration-300 group-hover:scale-105">
             <div class="story-ring-inner">
               <img alt="User avatar of Satyendra Maurya" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj679EAHGBdEqN3YcYJA_TnWM8wzGtmMm-KPoXn6nfyiGP4RHMqx0FHxN4TjicQEwLi4cYntcM4gZ8yJYxqcLFQ9CCR4__Tp-w2LiCzop-IO3RmAFIp7bwvkwQ3aPrHNfi0KoTd0olc9TSmYxHHDFgfqHH_WrBdol8QUttpl_qQYXhErXV0mV-Q7BwhncM/s320/logo.png" />
             </div>
           </div>
-          <div class="leading-tight">
-            <p class="font-semibold text-white text-lg">Satyendra Maurya</p>
-            <p class="text-[#7a7a7a] text-sm">Frontend Developer & SEO Strategist</p>
+          <div class="leading-tight header-info">
+            <p class="font-semibold text-white">Satyendra Maurya</p>
+            <p class="text-[#7a7a7a]">Frontend Developer & SEO Strategist</p>
           </div>
         </a>
         <button id="menuBtn" type="button" class="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all duration-300 text-sm font-semibold">
@@ -199,43 +199,46 @@
           <span class="hidden sm:inline">Menu</span>
         </button>
       </header>
+
       <section class="scroll-fade">
         <h2 class="subsection-title">SEO Case Studies</h2>
         <div class="space-y-6">
           <div class="case-study-card">
-            <div class="case-study-icon-container"><i data-lucide="bar-chart-2" class="case-study-icon"></i></div>
+            <div class="case-study-icon-container"><i data-lucide="zap" class="case-study-icon"></i></div>
             <div class="flex-grow">
-              <h3 class="font-medium text-zinc-200">Niche Blog - Traffic Growth from 0 to 100K/month</h3>
-              <p class="text-zinc-400 text-sm">TechSavvy.com (Example Site)</p>
-              <p class="mt-2 text-zinc-400 text-sm leading-relaxed">Scaled a new blog's organic traffic by focusing on low-competition keywords and high-quality content. Implemented a full technical and on-page SEO strategy, leading to AdSense approval and significant revenue.</p>
-              <div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">Keyword Research</span><span class="skill-tag">On-Page SEO</span><span class="skill-tag">AdSense Monetization</span></div>
+              <h3 class="font-medium text-zinc-200">Explosive Growth: 2.41M Organic Traffic in 2 Weeks</h3>
+              <p class="text-zinc-400 text-sm">
+                <a href="https://kannadamovierulz.in/" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition-colors">kannadamovierulz.in</a>
+              </p>
+              <p class="mt-2 text-zinc-400 text-sm leading-relaxed">Launched a personal blog and implemented an agile SEO strategy targeting untapped keywords within the Indian market. This approach led to immediate ranking, exponential organic traffic growth, and successful monetization from the outset.</p>
+              <div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">Rapid Growth SEO</span><span class="skill-tag">Keyword Strategy</span><span class="skill-tag">Monetization</span></div>
+            </div>
+          </div>
+          <div class="case-study-card">
+            <div class="case-study-icon-container"><i data-lucide="target" class="case-study-icon"></i></div>
+            <div class="flex-grow">
+              <h3 class="font-medium text-zinc-200">Competitive Edge: Top 3 Ranking for a Single-Page Site</h3>
+               <p class="text-zinc-400 text-sm">Confidential Agency Collaboration</p>
+              <p class="mt-2 text-zinc-400 text-sm leading-relaxed">In a strategic collaboration, we took on the challenge of ranking a single-page website for a highly competitive keyword. Despite facing rivals with larger budgets and resources, our targeted SEO experiment succeeded, securing a #3 Google position and driving new client acquisitions.</p>
+              <div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">Lean SEO</span><span class="skill-tag">Competitive Analysis</span><span class="skill-tag">Single-Page Optimization</span></div>
             </div>
           </div>
           <div class="case-study-card">
             <div class="case-study-icon-container"><i data-lucide="shopping-cart" class="case-study-icon"></i></div>
             <div class="flex-grow">
-              <h3 class="font-medium text-zinc-200">E-commerce WP - 250% Increase in Organic Sales</h3>
-              <p class="text-zinc-400 text-sm">CraftyCanvas.in (Example Site)</p>
-              <p class="mt-2 text-zinc-400 text-sm leading-relaxed">Revamped a WordPress e-commerce site by performing a complete SEO audit, optimizing product pages, and fixing Core Web Vitals issues. Resulted in higher rankings for commercial keywords and a major boost in sales.</p>
-              <div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">E-commerce SEO</span><span class="skill-tag">WordPress</span><span class="skill-tag">Technical SEO Audit</span></div>
-            </div>
-          </div>
-          <div class="case-study-card">
-            <div class="case-study-icon-container"><i data-lucide="map-pin" class="case-study-icon"></i></div>
-            <div class="flex-grow">
-              <h3 class="font-medium text-zinc-200">Local Business - Dominating Local Search Results</h3>
-              <p class="text-zinc-400 text-sm">KanpurBakers.com (Example Site)</p>
-              <p class="mt-2 text-zinc-400 text-sm leading-relaxed">Propelled a local bakery to the top of Google Maps and local search through targeted local SEO, Google Business Profile optimization, and building local citations. Foot traffic and online orders increased by over 300%.</p>
-              <div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">Local SEO</span><span class="skill-tag">Google Business Profile</span><span class="skill-tag">Schema Markup</span></div>
+              <h3 class="font-medium text-zinc-200">E-Commerce SEO: 1,000% Traffic Surge in 6 Months</h3>
+              <p class="text-zinc-400 text-sm">Confidential (Thai IT Retailer)</p>
+              <p class="mt-2 text-zinc-400 text-sm leading-relaxed">Executed a comprehensive SEO overhaul for a Thai e-commerce store with over 400 IT and networking products. By refining the client's initial efforts and deploying an advanced strategy, we boosted organic traffic by a staggering 1,000%, significantly expanding their digital footprint.</p>
+              <div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">E-commerce SEO</span><span class="skill-tag">WordPress</span><span class="skill-tag">Technical SEO</span></div>
             </div>
           </div>
           <div class="case-study-card locked-card">
-            <div class="case-study-icon-container"><i data-lucide="briefcase" class="case-study-icon"></i></div>
+            <div class="case-study-icon-container"><i data-lucide="gem" class="case-study-icon"></i></div>
             <div class="flex-grow blur-sm">
-              <h3 class="font-medium text-zinc-200">Confidential Corporate Project - Enterprise SEO</h3>
-              <p class="text-zinc-400 text-sm">Global Finance Corp</p>
-              <p class="mt-2 text-zinc-400 text-sm leading-relaxed">Managed a large-scale SEO initiative for an enterprise client, focusing on international SEO, log file analysis, and advanced technical fixes. This resulted in capturing new markets and a multi-million dollar increase in organic revenue.</p>
-              <div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">Enterprise SEO</span><span class="skill-tag">Advanced Audit</span><span class="skill-tag">Log File Analysis</span></div>
+              <h3 class="font-medium text-zinc-200">Sustained Dominance: 500K Traffic from a Single Page</h3>
+              <p class="text-zinc-400 text-sm">Confidential Niche Blog</p>
+              <p class="mt-2 text-zinc-400 text-sm leading-relaxed">This personal single-page blog has consistently held a top 1 or 2 position on Google for its primary keyword for over two years. This long-term ranking stability drives approximately 500,000 visitors and generates steady revenue through monetization.</p>
+              <div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">Authority Building</span><span class="skill-tag">Long-Term SEO</span><span class="skill-tag">High-Volume Traffic</span></div>
             </div>
             <div id="loginTriggerBtn" class="locked-overlay">
               <div class="group bg-zinc-900/50 border border-white/10 shadow-lg shadow-black/20 backdrop-blur-xl rounded-full px-4 py-2 flex items-center gap-2.5 text-sm transition-all duration-300 hover:border-white/20 hover:bg-zinc-900/80">
@@ -284,6 +287,8 @@
       </nav>
     </div>
   </div>
+
+
 
 
   <div id="loginOverlay" class="login-overlay p-4">
@@ -344,12 +349,14 @@
     const closeMenuBtn = document.getElementById('closeMenuBtn');
 
     function openMenu() {
+        menuOverlay.classList.remove('menu-hidden');
         menuOverlay.classList.add('visible');
         document.body.style.overflow = 'hidden';
     }
 
     function closeMenu() {
         menuOverlay.classList.remove('visible');
+        menuOverlay.classList.add('menu-hidden');
         document.body.style.overflow = '';
     }
 
@@ -445,10 +452,10 @@
     });
 
     function showStatus(message, type) {
-        loginStatus.innerHTML = `<i data-lucide="${type === 'success' ? 'check-circle' : 'alert-triangle'}" class="w-5 h-5"></i><span>${message}</span>`;
-        loginStatus.className = '';
-        loginStatus.classList.add('visible', type);
-        lucide.createIcons();
+      loginStatus.innerHTML = `<i data-lucide="${type === 'success' ? 'check-circle' : 'alert-triangle'}" class="w-5 h-5"></i><span>${message}</span>`;
+      loginStatus.className = '';
+      loginStatus.classList.add('visible', type);
+      lucide.createIcons();
     }
     
     function setButtonState(state) {
