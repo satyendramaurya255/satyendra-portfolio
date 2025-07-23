@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Satyendra Maurya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #0a0a0a;
+      color: #e6e6e6;
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background-color: #444; border-radius: 10px; }
+    .story-ring {
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 9999px; padding: 3px;
+      background: linear-gradient(90deg, #f09433, #bc1888);
+    }
+    .story-ring-inner {
+      background: #0a0a0a; border-radius: 9999px; padding: 3px;
+    }
+    .story-ring-inner > img {
+      display: block; border-radius: 9999px; width: 52px; height: 52px; object-fit: cover;
+    }
+    .header-info p:first-child { font-size: 1.125rem; }
+    .header-info p:last-child { font-size: 0.875rem; }
+    .blinking-dot {
+      display: inline-block; width: 8px; height: 8px;
+      background-color: #34D399;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 1);
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+    .scroll-fade {
+      opacity: 0; filter: blur(5px); transform: translateY(20px);
+      transition: opacity 0.8s ease-out, filter 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .scroll-fade.visible {
+      opacity: 1; filter: blur(0); transform: translateY(0);
+    }
+    .subsection-title {
+        font-weight: 600; font-size: 1.5rem;
+        background: linear-gradient(90deg, #f09433, #bc1888);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        margin-bottom: 2rem; max-width: fit-content;
+    }
+    .experience-logo-container {
+        width: 40px; height: 40px; border-radius: 0.375rem; border: 1px solid #27272a;
+        flex-shrink: 0; padding: 4px; background-color: #18181b;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .experience-logo { object-fit: contain; width: 100%; height: 100%; }
+    .skill-tag {
+        background-color: #18181b; color: #d4d4d8; font-size: 0.75rem;
+        font-weight: 500; padding: 4px 10px; border-radius: 9999px;
+        border: 1px solid #27272a;
+    }
+    .present-tag {
+        background-color: #18181b; color: #d4d4d8; font-size: 0.75rem;
+        font-weight: 500; padding: 4px 10px; border-radius: 9999px;
+        border: 1px solid #27272a;
+    }
+    .experience-hidden { display: none; }
+    .view-more-btn {
+        color: #a1a1aa; font-weight: 500; display: inline-flex;
+        align-items: center; gap: 0.25rem; transition: color 0.3s ease;
+    }
+    .view-more-btn:hover { color: #f4f4f5; }
+    .timeline-container {
+      position: relative;
+      padding-left: 30px;
+      border-left: 2px solid #27272a;
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -39.5px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #3f3f46;
+      border: 3px solid #0a0a0a;
+    }
+    .education-fade-out {
+      mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    }
+    .menu-overlay {
+      background-color: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      position: fixed; inset: 0; z-index: 50;
+      display: flex; padding: 3rem 2rem;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+    .menu-hidden { opacity: 0; visibility: hidden; }
+    .menu-content { max-width: 720px; margin: auto; color: #e6e6e6; width: 100%; }
+    .menu-section h2 { font-weight: 700; font-size: 1.5rem; margin-bottom: 1rem; color: #f9d1d1; }
+    .menu-list a { font-weight: 600; font-size: 1.125rem; color: #e6e6e6; transition: color 0.3s ease; }
+    .menu-list a:hover { color: #f9d1d1; }
+    .social-icons { display: flex; gap: 2rem; }
+    .social-icons a { color: #7a7a7a; transition: color 0.3s ease; }
+    .social-icons a:hover { color: #f9d1d1; }
+    .close-btn {
+      position: fixed; top: 1.5rem; right: 1.5rem;
+      color: #e6e6e6; cursor: pointer; z-index: 60;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .close-btn:hover { color: #f9d1d1; transform: scale(1.1); }
+    .gradient-text {
+      background: linear-gradient(90deg, #f09433, #bc1888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      font-weight: 600;
+    }
+    @keyframes wave {
+      0%, 100% { transform: rotate(-5deg); }
+      20% { transform: rotate(8deg); }
+      40% { transform: rotate(-8deg); }
+      60% { transform: rotate(8deg); }
+      80% { transform: rotate(-5deg); }
+    }
+    .animate-wave {
+      display: inline-block;
+      animation: wave 2.5s infinite;
+    }
+    .read-more-container {
+      position: relative;
+      max-height: 80px; /* Adjust this value to show the desired number of initial lines */
+      overflow: hidden;
+      transition: max-height 0.5s ease-in-out;
+    }
+    .read-more-container.expanded {
+      max-height: 1000px; /* A large value to ensure all content is shown */
+    }
+    .read-more-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: linear-gradient(to top, #0a0a0a, transparent);
+      pointer-events: none;
+    }
+    .read-more-container.expanded .read-more-fade {
+      display: none;
+    }
+    .keyword {
+        font-weight: 600;
+        color: #c0c0c0;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="max-w-4xl mx-auto px-6 py-8">
+    <main class="flex-1 flex flex-col gap-16">
+      <header class="flex items-center justify-between w-full py-2 scroll-fade">
+        <a href="#" class="flex items-center gap-4 group">
+          <div class="story-ring transition-transform duration-300 group-hover:scale-105">
+            <div class="story-ring-inner">
+              <img alt="User avatar of Satyendra Maurya" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj679EAHGBdEqN3YcYJA_TnWM8wzGtmMm-KPoXn6nfyiGP4RHMqx0FHxN4TjicQEwLi4cYntcM4gZ8yJYxqcLFQ9CCR4__Tp-w2LiCzop-IO3RmAFIp7bwvkwQ3aPrHNfi0KoTd0olc9TSmYxHHDFgfqHH_WrBdol8QUttpl_qQYXhErXV0mV-Q7BwhncM/s320/logo.png" />
+            </div>
+          </div>
+          <div class="leading-tight header-info">
+            <p class="font-semibold text-white">Satyendra Maurya</p>
+            <p class="flex items-center gap-2 text-zinc-400">
+                <span class="blinking-dot"></span>
+                Available for Work
+            </p>
+          </div>
+        </a>
+        <button id="menuBtn" type="button" class="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all duration-300 text-sm font-semibold">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+      </header>
+      <section class="scroll-fade w-full" style="transition-delay: 0.2s;">
+    <div class="flex justify-center mb-6">
+      <img src="satyendraimg.png" alt="Satyendra Maurya" class="w-full rounded-2xl shadow-md object-cover" />
+    </div>
+
+    <div id="about-section">
+        <p class="text-base text-zinc-400 leading-relaxed text-justify">
+            I'm Satyendra Maurya, a frontend developer based in Lucknow, India, with an MCA from Galgotias University. I'm passionate about crafting responsive, user-focused web interfaces. Alongside frontend development, I bring hands-on experience in SEO and WordPress, helping websites not only look good but perform better on search engines too.
+            <br/><br/>
+            I enjoy transforming ideas into practical, scalable web solutions that are built to grow—both in value and reach.  
+            You can check my 
+            <a href="/about.html" target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-semibold gradient-link">
+              <span class="gradient-text animate-wave flex items-center">
+                Resume <i data-lucide="download" class="w-4 h-4 ml-1"></i>
+              </span>
+            </a> for more. 
+        </p>
+        <br/><br/>
+        <div id="read-more-container" class="read-more-container">
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                I build websites that are <b class="keyword">clean</b>, <b class="keyword">fast</b>, and actually help in growing <b class="keyword">traffic</b> — not just something that “looks good”.
+            </p>
+        
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                I started my journey with <b class="keyword">blogging</b> — running my own <b class="keyword">WordPress</b> and niche content websites. Over the years, I’ve learned how <b class="keyword">Google</b> works, how content ranks, and how to optimize websites not just for search engines, but for real users too. From <b class="keyword">keyword research</b>, <b class="keyword">on-page SEO</b>, to setting up <b class="keyword">AdSense-ready sites</b>, everything I know has come from hands-on practice.
+            </p>
+            <br/>
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                In development, I work mostly with <b class="keyword">HTML</b>, <b class="keyword">Tailwind CSS</b>, <b class="keyword">JavaScript</b>, and frameworks like <b class="keyword">React.js</b> and <b class="keyword">Next.js</b>. I follow a <b class="keyword">mobile-first</b> and <b class="keyword">performance-focused</b> approach, keeping the UI clean and user-friendly. Whether it's a blog, landing page, or content platform — I make sure it’s <b class="keyword">fast</b>, <b class="keyword">responsive</b>, and ready to scale.
+            </p>
+            <br/>
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                On the CMS side, I mostly work with <b class="keyword">WordPress</b>, creating custom setups, optimizing for <b class="keyword">Core Web Vitals</b>, and using plugins like <b class="keyword">RankMath</b> to take care of SEO structure. I’ve also built <b class="keyword">automation systems</b> using <b class="keyword">Google Apps Script</b>, <b class="keyword">Google Sheets</b>, and <b class="keyword">Search Console API</b> — which help in automating tasks like post creation, <b class="keyword">real-time indexing</b>, and <b class="keyword">SEO tracking</b>.
+            </p>
+            <br/>
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                I use tools like <b class="keyword">Google Search Console</b>, <b class="keyword">Ubersuggest</b>, <b class="keyword">GTmetrix</b>, and <b class="keyword">PageSpeed Insights</b> on a daily basis to track performance and improve rankings. No guesswork — I rely on <b class="keyword">data</b>, <b class="keyword">testing</b>, and what actually works on <b class="keyword">Google</b>.
+            </p>
+            <br/>
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                When it comes to design, I use <b class="keyword">Figma</b> for basic layouts and structure. I’m not a full-time designer, but I like to keep things <b class="keyword">neat</b>, <b class="keyword">intuitive</b>, and easy to navigate.
+            </p>
+            <br/>
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                I completed my <b class="keyword">MCA</b> (Master of Computer Applications) from <b class="keyword">Galgotias University</b>, but most of what I know has come from building real projects, solving real problems, and staying consistent. I still learn every day — whether it’s a new <b class="keyword">SEO update</b>, a <b class="keyword">React hook</b>, or a better way to automate publishing.
+            </p>
+            <br/>
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                <b class="keyword">Skills & Tools I Work With</b><br>
+                <br/>
+                <b class="keyword">Frontend Development</b>: HTML5, CSS3, Tailwind CSS, JavaScript, React.js, Next.js<br>
+                <b class="keyword">CMS & Blogging</b>: WordPress (custom themes, SEO setup, AdSense-ready blogs)<br>
+                <b class="keyword">SEO</b>: On-Page SEO, Technical SEO, Structured Data, Core Web Vitals, Real-time Indexing<br>
+                <b class="keyword">Automation</b>: Google Apps Script, Google Sheets + API, Content Automation<br>
+                <b class="keyword">Design Support</b>: Figma (layouts & structure)<br>
+                <b class="keyword">Tools</b>: Google Search Console, RankMath, Ubersuggest, GTmetrix, PageSpeed Insights, Cloudflare
+            </p>
+            <br/>
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                I like to keep things <b class="keyword">simple</b>, <b class="keyword">focused</b>, and <b class="keyword">useful</b>. I don’t build flashy websites just for show — I build systems that are meant to <b class="keyword">grow</b>, <b class="keyword">rank</b>, and <b class="keyword">perform</b>. Every website I make reflects that thinking.
+            </p>
+            <br/>
+            <p class="text-base text-zinc-400 leading-relaxed text-justify">
+                If you’re looking for someone who understands both <b class="keyword">code</b> and <b class="keyword">content</b>, and builds websites that are made to grow — feel free to connect.
+            </p>
+            <div class="read-more-fade"></div>
+        </div>
+        <button id="read-more-btn" class="view-more-btn mt-4">
+            <span>Read More</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+        </button>
+    </div>
+</section>
+      <section class="scroll-fade" style="transition-delay: 0.3s;">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsSheN1i0KxkdvclVqBELpipY8WfHogAeMuuJzSuyejt3O1a2wnl9XlaR3GZ_FCZ2CC95qmnHaZnNwBPaS-nGz2PAxhLI84DXp0tVmyOjpkvT_TyQ97kuEBr4wDywyTkacyfcMkh_08M0v8R_OpXK9Ks-1_Nz-9BSyntYHN-FtbxIQq4KgbVtdWUPXnNo/s1600/framer-motion.png" alt="Framer Motion" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">Framer Motion</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhtaSVs7yDp3qNtxVJPkzejUGZj_-0dWMF2QUjBGNo5zOcn1KTDJlzjgvcwxTDhWJL0p1baEpTGX0UmSuuw8lfFY846fM8Si8mKEhJvufdvyorDA6tohivm_zu7qGHG4mUW0B2SWwBY7l7UtBwCZlKMwEXBEE_UvJuRzyRbU3C4VYs5j9Lz4ZZ3QoSMZkc/s1600/html.png" alt="HTML5" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">HTML5</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9EUK3SC9cfRFU5nAelnB-JV003W63qlrXcuDfuvLJL3q5IMXjQE63Ma6TBYqnjfnrZwE_ubPctI4AO4XwahixDgbNCGVG9w4baJ5JKgsE7Kq_uj_9Ch9KvhJvHnB7sP2pn0aB18xqunTlccYjkZTwx8EQoUMb3DYru9FKmURvvaKRtF-vaUBfRj1HrDA/s1600/tailwind.png" alt="Tailwind" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">Tailwind</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiedJcz6gVg0P49KZvwZmrIb8hgQFepv2tbFbOwFOFHv0W58iCunTgix_A7HUVoVgr_Bh_UzzngJTGwhYZH6ysHOgTXVyN-3vX82wtdzNi_Uqypl_mj8Y9qOt_BxLvZP-zbDp4PH8IpJwj2F2YvrKxxQ4eLhV2e3Z5QIvnBR7k6vRJs1TzguAhIy1eynFI/s1600/js.png" alt="JS" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">JS</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdx4SUJb_xxfjTZVgGL4MKpRiDpuT_p1R8vb35jvrOcUxurE0fbdqr6V811sm_nkZA_Nstq7HAPM6NaSntRNKIgsTfxQCS4A5PGHKzwtzLR6d6lRXyp_ayLKQwiT9uYFN7Pyz-13kNhamWfCOvXhrsOoeCTNPRgdi2Fxt7YcMCLcnpUVKRlGRaDfillzY/s1600/react.png" alt="React" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">React</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-5Klf02z6A4JdHrNlWofu80X9lGANBIDgsE8u4BNrl7dyhFM5mVGAk_2P5lItOwSpb2qwHxUSa732Rg0bYRVra6ZlZrXlTR88814nob-Y2-Hv8RUk9PLnL4CWnERlQDQERm_dldzRQCn7-WZjCmjk8tSOUXz_tr_nqosXkmjYQkQ2eQPE-3i6cU3fNA4/s1600/wp.png" alt="WordPress" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">WordPress</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYZz-u1SmHuwNFUgestDRr5vSCZ1NerPn3eJ2qoRndDNJpc7-hImh7QoxhHtyAyoBtxT0Wst2IJFbSIY5IvInivnG3L9dycnSmigZDwGcToL5v6saX888VYhErgs8ps9lyfw1z3qkTR_QYtiQLZTbw1D0uO0BIjplYXM9Go06y-nBQmkfR13rGDYkGq5s/s1600/adslogo.png" alt="Google Ads" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">Google Ads</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghZHlV4QVK0GwgdVuGfQnmKHml4IwgN1CskT-Y5-T2a8ZsXX7IL9eC7-1Kcj9QSQfMJJHDiUN7Gk8iwDktydYaWOWNp9U1k_7ceQYfP9FUp7uytj00_y0Q15S4d78yNh40vJ1rIkCnUB35WNSXUgnw4x2qrG-5xK78VANuuUczXpEt9ntoXcWsdcXWDZw/s320/GAnalytics.png" alt="Analytics" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">Analytics</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF0RxNlFINbD5S7kJC5rbacFmk21je1-mSatFPuMwbgF0ysaa5mQh8zcFkGSEYg6QhzPcLH9l4NPwYuQZ78T4mY1_IXinY12fzhqUcty8Zp1U3yrpUCi_iV1yJqoCYOBOQwQZ-X78CH9eVC7ckQK42fgr6r_oLfxIT4BtTXKiyjTE25LO8HTVN4iy83tw/s1600/search%20console.png" alt="Search Console" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">Search Console</span>
+          </div>
+          <div class="flex flex-col items-center bg-[#18181b] border border-[#27272a] rounded-xl p-4 shadow-sm hover:shadow-2xl hover:scale-105 hover:border-zinc-500 transition-all duration-300 group cursor-pointer">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwzoB0OS0mnB3JONs03bj6CG9BzvWo1ayQ85H_K-TVM3QPtRjlfnvZkdkSLgoMoxtHHP4V1hwyS1s_WNFuOO8xEcksPdmX9eOm_0pwXUXMDGm07DwUJyHsV4qbWF7468zx3DGWVEURdxvFP7geZqOnaa2u2RvOvWyvArIn2GTmip-PFlBPBuoP4qDe7xk/s320/semrush.png" alt="SEMrush" class="w-8 h-8 mb-2 grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-300" />
+            <span class="font-medium text-zinc-200 text-sm mt-1">SEMrush</span>
+          </div>
+        </div>
+      </section>
+      <section class="scroll-fade" style="transition-delay: 0.4s;">
+        <h2 class="subsection-title">Experience</h2>
+        <div class="space-y-4" id="experience-container">
+            <div class="experience-item rounded-lg transition-colors hover:bg-zinc-900 -m-2 p-2"><div class="flex gap-4"><div class="experience-logo-container"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKJTlFEBKKMHau96faWAnJzG0NCUp5AhOw9PI4C-A85rwYneCwa4iHdTnxT7N4mt1a4i-El0KZtok_rb0GsEzoqKq0J7Er4cjiEXiaE8hg9RWYsOXOMjXmWLRKXvEQW3PVyLJOQDKCjtrZ73XN3Muw9jwAw3rgp707E-A17GEJWqevWsy5FHgc0NMFrXc/s1600/mellow.jfif" alt="MellowDesigns Logo" class="experience-logo"></div><div class="flex-grow"><div class="flex justify-between items-start"><div><h3 class="font-medium text-zinc-200">No-Code Website Developer</h3><p class="text-zinc-400 text-sm">MellowDesigns</p></div><span class="present-tag">PRESENT</span></div><p class="mt-2 text-zinc-400 text-sm leading-relaxed">Worked on high-performance no-code websites using Webflow with CMS integration for dynamic content. Implemented smooth scroll-based animations and interactions using Framer Motion. Focused on responsive design, accessibility, and performance across all viewports.</p><div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">Webflow</span><span class="skill-tag">Framer Motion</span><span class="skill-tag">GSAP</span><span class="skill-tag">Figma</span></div></div></div></div>
+            <div class="experience-item rounded-lg transition-colors hover:bg-zinc-900 -m-2 p-2"><div class="flex gap-4"><div class="experience-logo-container"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRztHTPNI8Dwp5qe5ezdSLib5w3v5lZMeWlSpf8jJayFu5QQbTFTMvz68WHzIiE9k30xeyCRtIw6QIAxzFWg5uL-q7TuLVs_3oVcp4hsAUklCAVMVUWmYRbs1ZyGOMYNiTviS9T3CdrHRAQ2-Goj9IwZfhEY-UNYjXhLKikCeNLgYyfZatctwFHkPrtoA/s1600/gu.jfif" alt="Galgotias University Logo" class="experience-logo"></div><div class="flex-grow"><h3 class="font-medium text-zinc-200">Frontend Developer – Intern</h3><p class="text-zinc-400 text-sm">Galgotias University (DQAC Portal)</p><p class="mt-2 text-zinc-400 text-sm leading-relaxed">Developed the DQAC portal to automate academic quality processes for students and faculty. Built a dynamic, responsive frontend without backend/OAuth using Google Apps Script. Enabled research paper submission, faculty data management, and centralized reporting.</p><div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">HTML5</span><span class="skill-tag">Tailwind CSS</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Google Apps Script</span></div></div></div></div>
+            <div class="experience-item experience-hidden rounded-lg transition-colors hover:bg-zinc-900 -m-2 p-2"><div class="flex gap-4"><div class="experience-logo-container"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFtrPtJvyn2umRebJh4yPadrybuYlZyLvZY9igXyWW1BC3UY68sh4Dkmr34sWb2T6r7Qjt92R8hJS7uUhyphenhyphenjLpR1jvRfKxhmCwNB02WWZ_ZaF9E4IUCV4ryMFZaSkrM5qzB4gwvvW4W_O4tjInbYICC6V9YgEaQKmo2j_F1NQv2iDSzie87rC5qPiQTzgU/s1600/odm.jfif" alt="One Digi Media Logo" class="experience-logo"></div><div class="flex-grow"><h3 class="font-medium text-zinc-200">Digital Solutions Developer</h3><p class="text-zinc-400 text-sm">One Digi Media</p><p class="mt-2 text-zinc-400 text-sm leading-relaxed">Played a key role in building and scaling the agency's digital presence from the ground up. Led development of content-driven websites using WordPress, Webflow, and Shopify. Delivered responsive, SEO-ready, and API-integrated UIs tailored to client goals across industries.                         </p><div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">React.js</span><span class="skill-tag">CMS</span><span class="skill-tag">Shopify</span><span class="skill-tag">Webflow</span></div></div></div></div>
+            <div class="experience-item experience-hidden rounded-lg transition-colors hover:bg-zinc-900 -m-2 p-2"><div class="flex gap-4"><div class="experience-logo-container"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjeHxAumPKXPW9wqtlMfq9cVjfEP3VgamFsXGHFYfmnVbk4HU-JsnodvznpVbriP_TITqOLf4BwIGuSIGuohlkY6F8ueYcjmJmQ12xctUgaTTSeeMcArHiZrMWD0aYZfiRAVWakkXALe7mVwyZ4-z4ZOL23du4a8mm2kH_iZVU92MdXSpiTwpJNkNs96WQ/s1600/monkey.png" alt="Monkeybar Logo" class="experience-logo"></div><div class="flex-grow"><h3 class="font-medium text-zinc-200">Shopify Developer & eCommerce Strategist</h3><p class="text-zinc-400 text-sm">Monkeybar</p><p class="mt-2 text-zinc-400 text-sm leading-relaxed">Built and launched a custom Shopify storefront with optimized product architecture and responsive design. Led end-to-end eCommerce setup including theme development, payment integration, and conversion-focused UI. Also implemented data-driven marketing strategies to improve visibility, engagement, and sales.                         </p><div class="mt-3 flex flex-wrap gap-2"><span class="skill-tag">Shopify</span><span class="skill-tag">Liquid</span><span class="skill-tag">Digital Marketing</span></div></div></div></div>
+        </div>
+        <div class="mt-8" id="view-more-container">
+            <button class="view-more-btn" id="view-more-experience-btn"><span>View More</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i></button>
+        </div>
+      </section>
+      <section class="scroll-fade" style="transition-delay: 0.6s;">
+        <h2 class="subsection-title">Education</h2>
+        <div class="timeline-container education-fade-out">
+            <div class="timeline-item">
+                <h3 class="font-medium text-zinc-200">Master in Computer Application (MCA)</h3>
+                <p class="text-zinc-400 text-sm">Galgotias University, Greater Noida, UP</p>
+                <p class="mt-1 text-zinc-500 text-xs">2023 – 2025</p>
+            </div>
+            <div class="timeline-item">
+                <h3 class="font-medium text-zinc-200">Bachelor of Computer Application (BCA)</h3>
+                <p class="text-zinc-400 text-sm">Dr. RML Avadh University, Ayodhya, UP</p>
+                <p class="mt-1 text-zinc-500 text-xs">2019 – 2022</p>
+            </div>
+            <div class="timeline-item">
+                <h3 class="font-medium text-zinc-200">Intermediate</h3>
+                <p class="text-zinc-400 text-sm">UP State Board</p>
+                <p class="mt-1 text-zinc-500 text-xs">2017 – 2019</p>
+            </div>
+        </div>
+      </section>
+      <section class="mt-4 scroll-fade" style="transition-delay: 0.8s;">
+        <h2 class="subsection-title">Let's Connect</h2>
+        <p class="max-w-xl text-base text-zinc-400 mb-8">
+            Whether it’s a brilliant idea or a work-in-progress project, let’s make it real together! 🤝
+        </p>
+        <div class="flex flex-col items-start gap-y-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-x-8 gap-y-5 text-base">
+                <a href="mailto:imsatyendra87@gmail.com" class="flex items-center gap-2.5 font-semibold text-zinc-300 hover:text-amber-500 transition-all duration-300 transform hover:scale-105"><i data-lucide="mail" class="w-4 h-4"></i>imsatyendra87@gmail.com</a>
+                <a href="tel:+917310061155" class="flex items-center gap-2.5 font-semibold text-zinc-300 hover:text-amber-500 transition-all duration-300 transform hover:scale-105"><i data-lucide="phone" class="w-4 h-4"></i>+91 7310061155</a>
+            </div>
+            <div class="flex items-center gap-6 text-zinc-400">
+                <a href="#" target="_blank" rel="noopener" class="hover:text-white hover:scale-110 transition-all duration-300"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                <a href="#" target="_blank" rel="noopener" class="hover:text-white hover:scale-110 transition-all duration-300"><i data-lucide="globe" class="w-6 h-6"></i></a>
+                <a href="#" target="_blank" rel="noopener" class="hover:text-white hover:scale-110 transition-all duration-300"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="#" target="_blank" rel="noopener" class="hover:text-white hover:scale-110 transition-all duration-300"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+            </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="menuOverlay" class="menu-overlay menu-hidden" aria-hidden="true">
+    <button id="closeMenuBtn" class="close-btn"><i data-lucide="x" class="w-8 h-8"></i></button>
+    <div class="menu-content">
+      <nav class="flex flex-col md:flex-row gap-12 md:gap-24">
+        <div class="menu-section">
+          <h2 class="uppercase tracking-widest mb-4">Works</h2>
+          <ul class="space-y-4">
+            <li><a href="#web-projects" class="menu-list">Web Projects</a></li>
+            <li><a href="#seo-case-studies" class="menu-list">SEO Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="menu-section">
+          <h2 class="uppercase tracking-widest mb-4">Personal</h2>
+          <ul class="space-y-4">
+            <li><a href="#about-me" class="menu-list">About Me</a></li>
+            <li><a href="#side-projects" class="menu-list">Side Projects</a></li>
+            <li><a href="#blog-results" class="menu-list">Blog & Results</a></li>
+          </ul>
+        </div>
+        <div class="menu-section">
+          <h2 class="uppercase tracking-widest mb-4">Connect</h2>
+          <div class="social-icons">
+          <ul class="space-y-4">
+            <li><a href="#about-me" class="menu-list">Linkedin</a></li>
+            <li><a href="#side-projects" class="menu-list">X/Satyendra</a></li>
+            <li><a href="#blog-results" class="menu-list">Github</a></li>
+            <li><a href="#blog-results" class="menu-list">Mail</a></li>
+            <li><a href="#blog-results" class="menu-list">Call</a></li>
+          </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+      // Menu logic
+      const menuBtn = document.getElementById("menuBtn");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      function openMenu() {
+        menuOverlay.classList.remove("menu-hidden");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        menuOverlay.classList.add("menu-hidden");
+        document.body.style.overflow = "";
+      }
+      menuBtn.addEventListener("click", openMenu);
+      closeMenuBtn.addEventListener("click", closeMenu);
+      document.querySelectorAll('#menuOverlay a').forEach(link => { link.addEventListener('click', closeMenu); });
+      menuOverlay.addEventListener("click", (e) => { if (e.target === menuOverlay) closeMenu(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menuOverlay.classList.contains('menu-hidden')) { closeMenu(); } });
+      
+      // Scroll Fade-in
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-fade').forEach((el) => observer.observe(el));
+      
+      // Read More for About Section
+      const readMoreBtn = document.getElementById('read-more-btn');
+      const readMoreContainer = document.getElementById('read-more-container');
+      readMoreBtn.addEventListener('click', () => {
+          const isExpanded = readMoreContainer.classList.toggle('expanded');
+          const icon = readMoreBtn.querySelector('i');
+          readMoreBtn.querySelector('span').textContent = isExpanded ? 'Read Less' : 'Read More';
+          if (icon) {
+              icon.style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+          }
+      });
+
+      // View More/Less for Experience
+      const experienceContainer = document.getElementById('experience-container');
+      const experienceItems = experienceContainer.querySelectorAll('.experience-item');
+      const viewMoreContainer = document.getElementById('view-more-container');
+      const viewMoreExperienceBtn = document.getElementById('view-more-experience-btn');
+      const numVisible = 2;
+      if (experienceItems.length <= numVisible) {
+        viewMoreContainer.style.display = 'none';
+      } else {
+        for (let i = numVisible; i < experienceItems.length; i++) {
+          experienceItems[i].classList.add('experience-hidden');
+        }
+        viewMoreExperienceBtn.addEventListener('click', () => {
+          const isShowingMore = viewMoreExperienceBtn.querySelector('span').textContent === 'View Less';
+          const icon = viewMoreExperienceBtn.querySelector('i');
+          if (isShowingMore) {
+            for (let i = numVisible; i < experienceItems.length; i++) {
+              experienceItems[i].classList.add('experience-hidden');
+            }
+            viewMoreExperienceBtn.querySelector('span').textContent = 'View More';
+            if (icon) icon.style.transform = 'rotate(0deg)';
+          } else {
+            for (let i = numVisible; i < experienceItems.length; i++) {
+              experienceItems[i].classList.remove('experience-hidden');
+            }
+            viewMoreExperienceBtn.querySelector('span').textContent = 'View Less';
+            if (icon) icon.style.transform = 'rotate(180deg)';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
